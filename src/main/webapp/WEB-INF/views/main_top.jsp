@@ -1,4 +1,4 @@
-<%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%> 
+<%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
@@ -13,20 +13,31 @@
 
 		<tr style="background-color: #F7BE81; text-align: center;">
 
-			<td><a href="login.jsp">로그인</a></td>
-			<c:if test="${pageContext.request.userPrincipal.name != null}">
-				<td><a href="/logout">로그아웃</a></td>
+			<td><a href="${pageContext.request.contextPath}/main/productlist">상품목록</a></td>
+
+			<td><a href="${pageContext.request.contextPath}/main/cartlist">장바구니</a></td>
+
+			<td><a href="${pageContext.request.contextPath}/main/orderlist">마이페이지</a></td>
+
+			<td><a href="${pageContext.request.contextPath}/main/board">문의게시판</a></td>
+
+			<c:if test="${pageContext.request.userPrincipal.name == null}">
+				<td><a href="${pageContext.request.contextPath}/main/register">회원가입</a></td>
+
+				<td><a href="${pageContext.request.contextPath}/login">로그인</a></td>
 			</c:if>
-			<td><a href="productlist.jsp">상품목록</a></td>
 
-			<td><a href="cartlist.jsp">장바구니</a></td>
-
-			<td><a href="orderlist.jsp">마이페이지</a></td>
-
-			<td><a href="board.jsp">문의게시판</a></td>
-
+			<c:if test="${pageContext.request.userPrincipal.name != null}">
+				<td><a
+					href="javascript:document.getElementById('logout').submit()">로그아웃</a></td>
+			</c:if>
 		</tr>
 
 	</table>
+	<form id='logout' action='${pageContext.request.contextPath}/logout'
+		method='POST'>
+		<input name="${_csrf.parameterName}" type="hidden"
+			value="${_csrf.token}" />
+	</form>
 </body>
 </html>

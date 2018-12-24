@@ -14,20 +14,23 @@
 				authorities-by-username-query="select username, authority from authorities where username=?" />
 		</security:authentication-provider>
 	</security:authentication-manager>
+	
 	<security:http use-expressions="true" auto-config="true">
 		<security:intercept-url pattern="/"
 			access="permitAll" />
+		<security:intercept-url pattern="/main/**"
+			access="permitAll" />	
 		<security:intercept-url pattern="/login"
 			access="permitAll" />
 		<security:intercept-url pattern="/logout"
 			access="permitAll" />
 		<security:intercept-url pattern="/resources/**"
 			access="permitAll" />
-		<security:intercept-url pattern="/subject/**"
+<!-- 		<security:intercept-url pattern="/subject/**"
 			access="isAuthenticated()" />
 		<security:intercept-url pattern="docreate"
 			access="isAuthenticated()" />
-
+ -->
 		<security:intercept-url pattern="/**"
 			access="denyAll" />
 		<security:form-login login-page="/login" />

@@ -10,5 +10,8 @@
 	Spring Shopping Mall!!!!  
 </h1>
 <%@include file="main_top.jsp" %>
+
+
+<%@include file="main_bottom.jsp" %>
 </body>
 </html>

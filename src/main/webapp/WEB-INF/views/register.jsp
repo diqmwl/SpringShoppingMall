@@ -1,14 +1,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
-<%@ page session="false"%>
+<%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%> 
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html" ; charset=utf-8">
-<title>Create Offer</title>
+<title>Register</title>
 </head>
 <body>
+	<%@include file="main_top.jsp"%>
+
 	<sf:form method="post"
 		action="${pageContext.request.contextPath}/main/docreate"
 		modelAttribute="user">
@@ -34,5 +34,6 @@
 		</table>
 	</sf:form>
 
+	<%@include file="main_bottom.jsp"%>
 </body>
 </html>

@@ -13,9 +13,9 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import kr.ac.hansung.model.Subject;
+import kr.ac.hansung.model.Product;
 import kr.ac.hansung.model.User;
-import kr.ac.hansung.service.SubjectService;
+import kr.ac.hansung.service.ProductService;
 import kr.ac.hansung.service.UserService;
 
 @Controller

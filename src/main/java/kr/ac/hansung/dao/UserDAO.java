@@ -11,7 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import kr.ac.hansung.model.Subject;
+import kr.ac.hansung.model.Product;
 import kr.ac.hansung.model.User;
 
 @Repository

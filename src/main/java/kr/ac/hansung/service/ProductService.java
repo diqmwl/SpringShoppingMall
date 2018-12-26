@@ -8,19 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.ac.hansung.dao.ProductDAO;
-import kr.ac.hansung.dao.UserDAO;
 import kr.ac.hansung.model.Product;
-import kr.ac.hansung.model.User;
 
 @Service
-public class UserService {
+public class ProductService {
 
 	@Autowired
-	private UserDAO userDAO;
+	private ProductDAO productDAO;
 
-	public void insert(User user) {
+	public void insert(Product product) {
 		// TODO Auto-generated method stub
-		userDAO.insert(user);
+		productDAO.insert(product);
 	}
-
+	
 }

@@ -5,7 +5,9 @@ import java.net.URLEncoder;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -14,8 +16,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.ac.hansung.model.Product;
 import kr.ac.hansung.model.Review;
@@ -56,30 +60,38 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/main/productlist/detail")
-	public String productlistdetail(@RequestParam(value="productname") String productname,  Model model, Principal principal) {
+	public String productlistdetail(@RequestParam(value="productname") String productname,
+			@RequestParam(value="key") int key, Model model, Principal principal) {
 		
 		List<Product> product = productService.detatilsearch(productname);
+		int Allreview = productService.reviewcount(productname);
+		List<Review> review = productService.reviewsearch(key);
+		HashMap<String, Integer> paging = productService.paging(Allreview, key);
+		
+		model.addAttribute("paging", paging);
+		model.addAttribute("key",key);
 		model.addAttribute("product", product.get(0));
-		model.addAttribute("review", new Review());
+		model.addAttribute("review", review);
+		model.addAttribute("reviewinsert", new Review());
 		return "product_listdetail";
 	}
 	
+	@ResponseBody
 	@RequestMapping("/auth/review")
-	public String review(Model model, @Valid Review review, BindingResult result, Principal principal) throws UnsupportedEncodingException {
+	public String review(Model model, @Valid @ModelAttribute Review review, BindingResult result, Principal principal) throws UnsupportedEncodingException {
 		if (result.hasErrors()) {
 			List<ObjectError> errors = result.getAllErrors();
 			for (ObjectError error : errors) {
 				System.out.println(error.getDefaultMessage());
 			}
-			return "product_listdetail";
+			return "error";
 		}
 		review.setUsername(principal.getName());
 		SimpleDateFormat format = new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss");
 		Date date = new Date();
 		String time = format.format(date);
-		System.out.println(time);
 		review.setDate(time);
-		System.out.println(review.getProduct_name());
-		return "redirect:/main/productlist/detail?productname="+URLEncoder.encode(review.getProduct_name(), "UTF-8");
+		productService.reviewinsert(review);
+		return "success";
 	}
 }

@@ -20,14 +20,17 @@
 				dataType : "text",
 				data : queryString,
 				success : function(result) {
-					if (result == "success") {
+					if (result == "error"){
+						alert("리뷰내용을 작성해주세요")
+					}
+					else if (result == "success") {
 						location.reload();
 					}else{
-						alert("error 빈칸을 모두 입력해주세요");	
+						location.href='${pageContext.request.contextPath}/login.jsp';	
 					}
 				},
-				error : function() {
-					alert("error 빈칸을 모두 입력해주세요");
+				error : function(error) {
+					alert(error);
 				}
 			})
 		});
@@ -48,7 +51,7 @@
 			<td>상품 설명</td>
 			<td>사진</td>
 		</tr>
-			<tr onclick="location.href='${pageContext.request.contextPath}/main/productlist/detail?productname=${product.product_name}'">	
+			<tr>	
 			<td><p><c:out value="${product.product_name}"></c:out></p></td>
 			<td><p><c:out value="${product.product_price}"></c:out></p></td>
 			<td><p><c:out value="${product.product_desc}"></c:out></p></td>

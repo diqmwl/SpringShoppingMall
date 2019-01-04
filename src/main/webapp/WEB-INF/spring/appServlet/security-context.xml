@@ -39,5 +39,9 @@
 		<security:form-login login-page="/login" />
 		<security:logout />
 
+		<security:session-management invalid-session-url="/login?timeout=1">
+			<security:concurrency-control max-sessions="1" expired-url="/login" />
+		</security:session-management>
+
 	</security:http>
 </beans>

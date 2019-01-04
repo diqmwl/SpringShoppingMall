@@ -26,10 +26,14 @@ public class LoginController {
 	
 	@RequestMapping("/login")
 	public String showLogin(@RequestParam(value = "error", required = false) String error,
-			@RequestParam(value = "logout", required = false) String logout, Model model) {
+			@RequestParam(value = "logout", required = false) String logout,
+			@RequestParam(value = "timeout", required = false) String timeout, Model model) {
 		if (error != null) {
 			model.addAttribute("errorMsg", "Invalid username and password");
 		} 
+		if (timeout != null) {
+			model.addAttribute("timeout", "자동 로그아웃되었습니다.");
+		}
 		if (logout != null) {
 			model.addAttribute("logoutMsg", "You have been logged out successfully");
 		}

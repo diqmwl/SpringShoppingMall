@@ -17,6 +17,12 @@
 				<h3>${logoutMsg}</h3>
 			</div>
 		</c:if>
+		<c:if test="${not empty timeout}">
+			<div style="color: #0000ff">
+				<h3>${timeout}</h3>
+			</div>
+		</c:if>
+		
 		<form name='f' action='${pageContext.request.contextPath}/login'
 			method='POST'>
 			<c:if test="${not empty errorMsg}">

@@ -81,9 +81,17 @@ public class ProductDAO {
 		String review_desc = review.getReview_desc();
 		int score = review.getScore();
 		String date = review.getDate();
-		String sqlStatement = "insert into review (username, product_name, review_desc, score, date) values (?, ?, ?, ?, ?)";
-		return jdbcTemplate.update(sqlStatement,
-				new Object[] { username, product_name, review_desc, score, date }) == 1;
+
+		String SelectsqlStatement = "select count(*) from review where product_name = ? and username = ?";
+		if (jdbcTemplate.queryForObject(SelectsqlStatement, new Object[] { product_name, username },
+				Integer.class) == 0) {
+			String sqlStatement = "insert into review (username, product_name, review_desc, score, date) values (?, ?, ?, ?, ?)";
+			return jdbcTemplate.update(sqlStatement,
+					new Object[] { username, product_name, review_desc, score, date }) == 1;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public Integer reviewcount(String productname) {

@@ -25,8 +25,13 @@
 					}
 					else if (result == "success") {
 						location.reload();
-					}else{
-						location.href='${pageContext.request.contextPath}/login.jsp';	
+					}
+					else if (result == "double"){
+						alert("이미 리뷰를 등록하셨습니다.")
+					}
+					else{
+						alert("로그인이 필요합니다.");
+						location.href='${pageContext.request.contextPath}/login';	
 					}
 				},
 				error : function(error) {
@@ -93,8 +98,10 @@
 		var="idx">
 		<a href="${pageContext.request.contextPath}/main/productlist/detail?productname=${product.product_name}&key=${idx}">[${idx}]</a>
 	</c:forEach>
-	<c:if test="${key != paging.totalPage}">
+	<c:if test="${key < paging.totalPage-10}">
 		<a href="${pageContext.request.contextPath}/main/productlist/detail?productname=${product.product_name}&key=${paging.startPage+10}">[다음]</a>
+	</c:if>
+	<c:if test="${key != paging.totalPage}">
 		<a href="${pageContext.request.contextPath}/main/productlist/detail?productname=${product.product_name}&key=${paging.totalPage}">[끝]</a>
 	</c:if>
 

@@ -91,7 +91,10 @@ public class ProductController {
 		Date date = new Date();
 		String time = format.format(date);
 		review.setDate(time);
-		productService.reviewinsert(review);
+		Boolean double_check = productService.reviewinsert(review);
+		if(double_check == false) {
+			return "double";
+		}
 		return "success";
 	}
 }
